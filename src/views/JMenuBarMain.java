@@ -18,6 +18,7 @@ public class JMenuBarMain extends JMenuBar {
     public JMenuBarMain() {
         this.archivo = new JMenu("Archivo");
         JMenuItem correr = new JMenuItem("Correr");
+        correr.setBackground(Color.decode("#444444"));
         JMenuItem limpiar = new JMenuItem("Limpiar");
         JMenuItem salir = new JMenuItem("Salir");
         this.archivo.add(correr);

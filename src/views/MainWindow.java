@@ -1,8 +1,10 @@
 package views;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -18,24 +20,38 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         designWindow();
-        setSize(500, 500);
+        setExtendedState(MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
+
         JPanel pnCenter = new JPanel();
-        pnCenter.setLayout(new GridLayout(1,2));
-        
+        pnCenter.setLayout(new BorderLayout());
+
+        JPanel pnBotones = new JPanel();
+        pnBotones.setLayout(new GridLayout(1, 2));
+        JButton btnCorrer = new JButton("Run");
+        JButton btnLimpiar = new JButton("Limpiar");
+        pnBotones.setBorder(BorderFactory.createTitledBorder("  "));
+        pnBotones.add(btnCorrer);
+        pnBotones.add(btnLimpiar);
+
+        pnCenter.add(pnBotones, BorderLayout.PAGE_START);
+
         jMenuBarMain = new JMenuBarMain();
         add(jMenuBarMain, BorderLayout.PAGE_START);
-        
+
+        JPanel pnContenido = new JPanel();
+        pnContenido.setLayout(new GridLayout(1, 2));
         panelConsola = new PanelConsola();
         panelEditor = new PanelEditor();
-        pnCenter.add(panelConsola);
-        pnCenter.add(panelEditor);
+        pnContenido.add(panelEditor);
+        pnContenido.add(panelConsola);
         
+        pnCenter.add(pnContenido, BorderLayout.CENTER);
+
         add(pnCenter, BorderLayout.CENTER);
-        
+
         setVisible(true);
     }
 
