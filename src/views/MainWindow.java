@@ -1,7 +1,10 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -10,16 +13,29 @@ import javax.swing.JFrame;
 public class MainWindow extends JFrame {
 
     private JMenuBarMain jMenuBarMain;
+    private PanelConsola panelConsola;
+    private PanelEditor panelEditor;
 
     public MainWindow() {
         designWindow();
+        setSize(500, 500);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         
+        JPanel pnCenter = new JPanel();
+        pnCenter.setLayout(new GridLayout(1,2));
         
         jMenuBarMain = new JMenuBarMain();
         add(jMenuBarMain, BorderLayout.PAGE_START);
-        setSize(500, 500);
+        
+        panelConsola = new PanelConsola();
+        panelEditor = new PanelEditor();
+        pnCenter.add(panelConsola);
+        pnCenter.add(panelEditor);
+        
+        add(pnCenter, BorderLayout.CENTER);
+        
         setVisible(true);
     }
 
@@ -31,13 +47,7 @@ public class MainWindow extends JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
