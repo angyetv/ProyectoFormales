@@ -4,6 +4,6 @@ package models;
  *
  * @author angyedanielatorresveloza
  */
-public class AdministratorLexiconAnalyzer {
+public class LexiconAnalyzerAdministrator {
     
 }

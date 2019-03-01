@@ -2,6 +2,8 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import models.LexiconAnalyzerAdministrator;
+import models.SyntacticAnalyzerAdministrator;
 import views.MainWindow;
 
 /**
@@ -19,6 +21,8 @@ public class Controller implements ActionListener {
         }
         return controller;
     }
+    private LexiconAnalyzerAdministrator lexiconAnalyzerAdministrator;
+    private SyntacticAnalyzerAdministrator syntacticAnalyzerAdministrator;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -51,5 +55,21 @@ public class Controller implements ActionListener {
 
     private void runCode() {
         System.out.println(mainWindow.getPrint());
+    }
+
+    public void setLexiconAnalyzerAdministrator(LexiconAnalyzerAdministrator lexiconAnalyzerAdministrator) {
+        this.lexiconAnalyzerAdministrator = lexiconAnalyzerAdministrator;
+    }
+
+    public void setSyntacticAnalyzerAdministrator(SyntacticAnalyzerAdministrator syntacticAnalyzerAdministrator) {
+        this.syntacticAnalyzerAdministrator = syntacticAnalyzerAdministrator;
+    }
+
+    public LexiconAnalyzerAdministrator getLexiconAnalyzerAdministrator() {
+        return lexiconAnalyzerAdministrator;
+    }
+
+    public SyntacticAnalyzerAdministrator getSyntacticAnalyzerAdministrator() {
+        return syntacticAnalyzerAdministrator;
     }
 }
