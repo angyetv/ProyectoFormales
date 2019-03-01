@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -13,29 +12,29 @@ import javax.swing.JPanel;
  */
 public class JMenuBarMain extends JMenuBar {
 
-    private JMenu archivo, ayuda;
+    private JMenu file, help;
 
     public JMenuBarMain() {
-        this.archivo = new JMenu("Archivo");
-        JMenuItem correr = new JMenuItem("Correr");
-        JMenuItem limpiar = new JMenuItem("Limpiar");
-        JMenuItem salir = new JMenuItem("Salir");
-        this.archivo.add(correr);
-        this.archivo.add(limpiar);
-        this.archivo.add(salir);
-        
-        this.ayuda = new JMenu("Ayuda");
-        JMenuItem acercaDe = new JMenuItem("Acerca de");
-        JMenuItem ayudaItem = new JMenuItem("Ayuda");
-        this.ayuda.add(acercaDe);
-        this.ayuda.add(ayudaItem);
-        
+        this.file = new JMenu("Archivo");
+        JMenuItem jmiRun = new JMenuItem("Correr");
+        JMenuItem jmiClear = new JMenuItem("Limpiar");
+        JMenuItem jmiExit = new JMenuItem("Salir");
+        this.file.add(jmiRun);
+        this.file.add(jmiClear);
+        this.file.add(jmiExit);
+
+        this.help = new JMenu("Ayuda");
+        JMenuItem jmiAboutOf = new JMenuItem("Acerca de");
+        JMenuItem jmiAyudaItem = new JMenuItem("Ayuda");
+        this.help.add(jmiAboutOf);
+        this.help.add(jmiAyudaItem);
+
         JPanel pnCentral = new JPanel();
         pnCentral.setLayout(new GridLayout(2, 0));
         pnCentral.add(new PanelEditor());
         pnCentral.add(new PanelConsola());
-        
-        add(archivo);
-        add(ayuda);
+
+        add(file);
+        add(help);
     }
 }
