@@ -27,6 +27,7 @@ public class PanelEditor extends JPanel {
     }
 
     public ArrayList<String> getCode() {
+        System.out.println("entrooo");
         ArrayList<String> codeList = new ArrayList<>();
         String[] parts = jTextArea.getText().split("\\*");
         for (int i = 0; i < parts.length; i++) {

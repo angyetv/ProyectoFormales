@@ -55,7 +55,6 @@ public class Controller implements ActionListener {
 
     private void runCode() {
         lexiconAnalyzerAdministrator.setLines(mainWindow.getCode());
-        lexiconAnalyzerAdministrator.print();
     }
 
     public void setLexiconAnalyzerAdministrator(LexiconAnalyzerAdministrator lexiconAnalyzerAdministrator) {

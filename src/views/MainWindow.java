@@ -33,8 +33,8 @@ public class MainWindow extends JFrame {
         JPanel pnButtons = new JPanel();
         pnButtons.setLayout(new GridLayout(1, 2));
         JButton btnRun = new JButton("Run");
-        btnRun.setActionCommand(Constants.RUN.name());
         btnRun.addActionListener(Controller.getInstance());
+        btnRun.setActionCommand(Constants.RUN.name());
         JButton btnClear = new JButton("Limpiar");
         pnButtons.setBorder(BorderFactory.createTitledBorder("  "));
         pnButtons.add(btnRun);
@@ -73,6 +73,8 @@ public class MainWindow extends JFrame {
     }
     
     public ArrayList<String> getCode() {
-        return panelEditor.getCode();
+        ArrayList<String> codes = panelEditor.getCode();
+        System.out.println("tamano: " + codes.size());
+        return codes;
     }
 }
