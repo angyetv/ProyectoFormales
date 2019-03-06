@@ -34,12 +34,4 @@ public class PanelEditor extends JPanel {
         }
         return codeList;
     }
-
-    public String print() {
-        String salida = "";
-        for (String string : getCode()) {
-            salida += string + "\t";
-        }
-        return salida;
-    }
 }

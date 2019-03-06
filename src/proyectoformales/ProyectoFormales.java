@@ -15,6 +15,6 @@ public class ProyectoFormales {
         controlller.setMainWindow(mainWindow);
         controlller.setLexiconAnalyzerAdministrator(lexiconAnalyzerAdministrator);
         controlller.setSyntacticAnalyzerAdministrator(syntacticAnalyzerAdministrator);
-        System.out.println(mainWindow.getPrint());
+        System.out.println(mainWindow.getCode());
     }
 }

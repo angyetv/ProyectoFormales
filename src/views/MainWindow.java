@@ -4,6 +4,7 @@ import controllers.Constants;
 import controllers.Controller;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -71,7 +72,7 @@ public class MainWindow extends JFrame {
         }
     }
     
-    public String getPrint() {
-        return panelEditor.print();
+    public ArrayList<String> getCode() {
+        return panelEditor.getCode();
     }
 }

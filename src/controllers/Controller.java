@@ -14,6 +14,8 @@ public class Controller implements ActionListener {
 
     private static Controller controller = null;
     private MainWindow mainWindow;
+    private LexiconAnalyzerAdministrator lexiconAnalyzerAdministrator;
+    private SyntacticAnalyzerAdministrator syntacticAnalyzerAdministrator;
 
     public static Controller getInstance() {
         if (controller == null) {
@@ -21,8 +23,6 @@ public class Controller implements ActionListener {
         }
         return controller;
     }
-    private LexiconAnalyzerAdministrator lexiconAnalyzerAdministrator;
-    private SyntacticAnalyzerAdministrator syntacticAnalyzerAdministrator;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -54,7 +54,8 @@ public class Controller implements ActionListener {
     }
 
     private void runCode() {
-        System.out.println(mainWindow.getPrint());
+        lexiconAnalyzerAdministrator.setLines(mainWindow.getCode());
+        lexiconAnalyzerAdministrator.print();
     }
 
     public void setLexiconAnalyzerAdministrator(LexiconAnalyzerAdministrator lexiconAnalyzerAdministrator) {
