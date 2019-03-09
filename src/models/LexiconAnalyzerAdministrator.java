@@ -141,7 +141,10 @@ public class LexiconAnalyzerAdministrator {
 
     public void setLines(ArrayList<String> code) {
         for (String string : code) {
-            linesList.add(string);
+            if (string.length() != 0) {
+                System.out.println("Espacio");
+                linesList.add(string);
+            }
         }
     }
 
