@@ -2,7 +2,9 @@ package proyectoformales;
 
 import controllers.Controller;
 import models.LexiconAnalyzerAdministrator;
-import models.SyntacticAnalyzerAdministrator;
+import models.SyntacticAnalyzer;
+import views.JDAboutOf;
+import views.JDHelp;
 import views.MainWindow;
 
 public class ProyectoFormales {
@@ -11,9 +13,13 @@ public class ProyectoFormales {
         Controller controlller = Controller.getInstance();
         MainWindow mainWindow = new MainWindow();
         LexiconAnalyzerAdministrator lexiconAnalyzerAdministrator = new LexiconAnalyzerAdministrator();
-        SyntacticAnalyzerAdministrator syntacticAnalyzerAdministrator = new SyntacticAnalyzerAdministrator();
+        SyntacticAnalyzer syntacticAnalyzer = new SyntacticAnalyzer();
+        JDAboutOf jDAboutOf = new JDAboutOf();
+        JDHelp jDHelp = new JDHelp();
         controlller.setMainWindow(mainWindow);
         controlller.setLexiconAnalyzerAdministrator(lexiconAnalyzerAdministrator);
-        controlller.setSyntacticAnalyzerAdministrator(syntacticAnalyzerAdministrator);
+        controlller.setSyntacticAnalyzer(syntacticAnalyzer);
+        controlller.setjDAboutOf(jDAboutOf);
+        controlller.setjDHelp(jDHelp);
     }
 }
