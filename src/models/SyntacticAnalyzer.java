@@ -25,21 +25,19 @@ public class SyntacticAnalyzer {
         countLine = 1;
     }
 
-    public void validateProgram(ArrayList<String> program) {
+    public String validateProgram(ArrayList<String> program) {
         this.myProgram = program;
-        int auxContLine = 1;
+        String outputAnalyzer = "\n--------------Resultado Analizador Sintactico--------------\n";
+        
         for (String line : program) {
-            System.out.println("Linea " + auxContLine + ": " + line);
-            auxContLine++;
-        }
-        System.out.println("");
-        program.forEach((line) -> {
             try {
                 validateLine(line);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage()); //IMPRIME MENSAJE
+                outputAnalyzer += ex.getMessage() + "\n";
             }
-        });
+        }
+        return outputAnalyzer;
     }
 
     /**
@@ -314,4 +312,7 @@ public class SyntacticAnalyzer {
         }
     }
 
+    public void setCountLine(int countLine) {
+        this.countLine = countLine;
+    }
 }

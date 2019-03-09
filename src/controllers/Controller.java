@@ -69,6 +69,11 @@ public class Controller implements ActionListener {
         } else {
             MainWindow.printInConsole(lexiconOutput, false);
         }
+        mainWindow.printInConsole(syntacticAnalyzer.validateProgram(lexiconAnalyzerAdministrator.getToSyntactic()), false);
+        syntacticAnalyzer.setCountLine(0);
+        lexiconAnalyzerAdministrator.getLinesList().clear();
+        lexiconAnalyzerAdministrator.setTOKEN(0);
+        
     }
 
     public void setLexiconAnalyzerAdministrator(LexiconAnalyzerAdministrator lexiconAnalyzerAdministrator) {

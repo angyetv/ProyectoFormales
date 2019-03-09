@@ -5,9 +5,9 @@ package wordReserved;
  * @author Daniela Torres
  */
 public enum CategoryIdentifier {
-    OPERADOR_DE_SUMA("#", "OperadorDeSuma"), VARIABLE_NATURAL("natural", "VariableNatural"), 
-    OPERADOR_DE_ASIGNACION("=", "OperadorDeAsignacion"), CABECERA("Suma", "Cabecera"),
-    FINAL("FIN", "FinalClase"), SALIDA_CONSOLA("ver", "SalidaConsola"), 
+    OPERADOR_DE_SUMA("#", "OperadorDeSuma"), VARIABLE_NATURAL("NATURAL", "VariableNatural"), 
+    OPERADOR_DE_ASIGNACION("=", "OperadorDeAsignacion"), CABECERA("INICIO", "Cabecera"),
+    FINAL("FIN", "FinalClase"), SALIDA_CONSOLA("VER", "SalidaConsola"), 
     LIBRERIA_VER("LIBRERIAVER", "LibreriaVer"), LIBRERIA_SUMA("LIBRERIASUMA", "LibreriaSuma"), 
     LIBRERIA_NATURAL("LIBRERIANATURAL", "LibreriaNatural"), NOMBRE_VARIABLE("[A-Za-z0-9]+", "NombreVariable"), 
     NUMERICO("[0-9]+", "Numero"), CONDICION("CONDICION", "Condicion"), CICLO("CICLO", "Ciclo"),

@@ -1,4 +1,4 @@
- package models;
+package models;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -147,12 +147,11 @@ public class LexiconAnalyzerAdministrator {
 
     public String printLexicon() {
         String salida = "\n-----------------Resultado Analizador Lexico---------------\n";
-        for (String string : getLexicon()) {
-            salida += string + "\n";
+        ArrayList<String> listAux = getLexicon();
+        for (int i = 0; i < listAux.size(); i++) {
+            salida += "Linea " + (i + 1) + ": " + listAux.get(i) + "\n";
         }
         System.out.println(salida);
-        linesList.clear();
-        TOKEN = 0;
         return salida;
     }
 
@@ -201,4 +200,11 @@ public class LexiconAnalyzerAdministrator {
 //        laa.printLexicon();
 ////        laa.printSyntactic();
 //    }
+    public ArrayList<String> getLinesList() {
+        return linesList;
+    }
+
+    public static int setTOKEN(int value) {
+        return TOKEN = value;
+    }
 }
