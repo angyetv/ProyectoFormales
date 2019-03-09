@@ -7,7 +7,9 @@ import wordReserved.CategoryIdentifier;
 
 /**
  *
- * @author angyedanielatorresveloza
+ * Clase principal para Analisis Lexico.
+ *
+ * @author Daniela Torres
  */
 public class LexiconAnalyzerAdministrator {
 
@@ -18,6 +20,12 @@ public class LexiconAnalyzerAdministrator {
         linesList = new ArrayList<>();
     }
 
+    /**
+     * Metrodo que obtiene una lista linea a linea del resultado del Analisis
+     * lexico.
+     *
+     * @return Una lista de token e Identificador de categoria.
+     */
     public ArrayList<String> getLexicon() {
         ArrayList<String> arrayList = new ArrayList<>();
         for (int i = 0; i < linesList.size(); i++) {
@@ -61,6 +69,11 @@ public class LexiconAnalyzerAdministrator {
         return arrayList;
     }
 
+    /**
+     * Obtine una lista resumida del analisis lexico.
+     *
+     * @return Omite el token.
+     */
     public ArrayList<String> getToSyntactic() {
         ArrayList<String> arrayList = new ArrayList<>();
         for (int i = 0; i < linesList.size(); i++) {
@@ -86,6 +99,12 @@ public class LexiconAnalyzerAdministrator {
         return arrayList;
     }
 
+    /**
+     * Valida las palabras reservadas, con uso de expresiones reguales.
+     *
+     * @param word
+     * @return El identificador de categoria de cada palabra.
+     */
     public String categoryIdentifier(String word) {
         Pattern pat = Pattern.compile(CategoryIdentifier.NOMBRE_VARIABLE.getSymbol());
         Matcher mat = pat.matcher(word);
@@ -134,20 +153,36 @@ public class LexiconAnalyzerAdministrator {
         }
     }
 
+    /**
+     * Expresion regular para validar si una palabra ingresada es numerica.
+     *
+     * @param word
+     * @return true si es numerica.
+     */
     public boolean isAllNumber(String word) {
         Pattern pat = Pattern.compile(CategoryIdentifier.NUMERICO.getSymbol());
         return pat.matcher(word).matches();
     }
 
+    /**
+     * Obtiene las lineas ingresadas por el usuario y hace la validacion de
+     * espaciado sin caracteres.
+     *
+     * @param code
+     */
     public void setLines(ArrayList<String> code) {
         for (String string : code) {
             if (string.length() != 0) {
-                System.out.println("Espacio");
                 linesList.add(string);
             }
         }
     }
 
+    /**
+     * Une el resultado del analisis lexico.
+     *
+     * @return String que sera mostrado en la consola grafica.
+     */
     public String printLexicon() {
         String salida = "\n-----------------Resultado Analizador Lexico---------------\n";
         ArrayList<String> listAux = getLexicon();
@@ -158,6 +193,9 @@ public class LexiconAnalyzerAdministrator {
         return salida;
     }
 
+    /**
+     * Metodo usado para test.
+     */
     public void printSyntactic() {
         System.out.println("tamanio: " + getToSyntactic().size());
         String salida = "";
@@ -167,6 +205,13 @@ public class LexiconAnalyzerAdministrator {
         System.out.println(salida);
     }
 
+    /**
+     * Valida que un NombreVariable ya este ingresado.
+     *
+     * @param word
+     * @param list
+     * @return El token a asignar en cada palabra analizada.
+     */
     public int isExistInTheList(String word, ArrayList<String> list) {
         for (int i = 0; i < list.size(); i++) {
             if (linesList.get(i).contains(word)) {
@@ -182,31 +227,17 @@ public class LexiconAnalyzerAdministrator {
         return TOKEN++;
     }
 
-//    public static void main(String[] args) {
-//        LexiconAnalyzerAdministrator laa = new LexiconAnalyzerAdministrator();
-//        ArrayList<String> lines = new ArrayList<>();
-//        lines.add("LIBRERIAVER");
-//        lines.add("LIBRERIASUMA");
-//        lines.add("LIBRERIANATURAL");
-//        lines.add(" ");
-//        lines.add("CICLO");
-//        lines.add("Suma");
-//        lines.add("natural resultado");
-//        lines.add("natural numero1 = 5");
-//        lines.add("natural numero2 = 7");
-//        lines.add("ver numero1 # numero2 = resultado");
-//        lines.add("FIN");
-////        lines.add("cc");
-////        lines.add("cc");
-////        lines.add("cc");
-//        laa.setLines(lines);
-//        laa.printLexicon();
-////        laa.printSyntactic();
-//    }
+    /**
+     * @return la lista de lineas a analizar.
+     */
     public ArrayList<String> getLinesList() {
         return linesList;
     }
 
+    /**
+     * @param value
+     * @return nuevo valor del Token.
+     */
     public static int setTOKEN(int value) {
         return TOKEN = value;
     }
