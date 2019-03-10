@@ -6,6 +6,7 @@
 package Arboles;
 
 import models.MessageSyntax;
+import static models.MessageSyntax.buildOutputErrorMessage;
 import wordReserved.CategoryIdentifier;
 
 /**
@@ -15,7 +16,7 @@ import wordReserved.CategoryIdentifier;
 public class ArbolCondicion {
       /* Atributos */
     private Nodo raiz;
-    private final String OPERADOR_DE_EQUIVALENCIA = "OperadorDeEquvalencia";
+    private final String OPERADOR_DE_EQUIVALENCIA = "OperadorDeEquivalencia";
     private final String SIMBOLOS_OPERADOR_DE_EQUIVALENCIA = "<,>,>=,<=,==";
     /* Contructories */
     @SuppressWarnings("OverridableMethodCallInConstructor")
@@ -29,7 +30,6 @@ public class ArbolCondicion {
         this.addNodo(new Nodo(SIMBOLOS_OPERADOR_DE_EQUIVALENCIA));
         this.addNodo(new Nodo(CategoryIdentifier.NOMBRE_VARIABLE.getEquivalence()));
         this.addNodo(new Nodo(CategoryIdentifier.NOMBRE_VARIABLE.getSymbol()));
-        mostrarPreOrden(this.raiz);
     }
 
     /**
@@ -107,18 +107,20 @@ public class ArbolCondicion {
     /**
      * Valida la linea con el arbol de estructura de definicion de un ciclo
      * @param auxLine
+     * @param numLine
+     * @throws java.lang.Exception
      */
-    public void validateLineWithArbolOfCondition(String[] auxLine) {
+    public void validateLineWithArbolOfCondition(String[] auxLine, int numLine) throws Exception {
         if (!raiz.getValor().equals(auxLine[0])) {
-            System.out.println("Syntax Error: Inicio de condicion incorrecto");
+             throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_ERROR_SYNTAX));
         } else if (!raiz.getHojaDerecha().getValor().equals(auxLine[1])) {
-            System.out.println("Syntax Error: nombre de variable incorrecto");
+             throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_VARIABLE_NAME));
         } else if (!raiz.getHojaDerecha().getHojaDerecha().getValor().equals(validateOperatorsEquivalency(auxLine[2]))) {
-            System.out.println("Syntax Error: Operacion de equivalencia incorrecto");
+             throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_OPERATION_EQUIVALENCY));
         } else if (!raiz.getHojaDerecha().getHojaDerecha().getHojaDerecha().getValor().equals(auxLine[3])) {
-            System.out.println("Syntax Error: nombre de variable incorrecto");
+             throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_VARIABLE_NAME));
         } else {
-            System.err.println("\t" + MessageSyntax.MSG_SUCESSFULL_SYNTAX);
+            throw new Exception(MessageSyntax.buildOutputSuccesfullMessage(numLine, MessageSyntax.MSG_SUCESSFULL_SYNTAX));
         }
     }
     

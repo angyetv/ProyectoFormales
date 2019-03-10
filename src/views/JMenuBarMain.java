@@ -2,6 +2,7 @@ package views;
 
 import controllers.Actions;
 import controllers.Controller;
+import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -17,6 +18,7 @@ public class JMenuBarMain extends JMenuBar {
     private JMenu file, help;
 
     public JMenuBarMain() {
+        setBackground(Color.decode("#001a57"));
         this.file = new JMenu("Archivo");
         JMenuItem jmiRun = new JMenuItem("Ejecutar");
         jmiRun.addActionListener(Controller.getInstance());

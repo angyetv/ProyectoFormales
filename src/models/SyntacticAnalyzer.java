@@ -8,6 +8,7 @@ import Arboles.ArbolDefinitionLibreria;
 import Arboles.ArbolSalidaConsola;
 import java.util.ArrayList;
 import static models.MessageSyntax.buildOutputErrorMessage;
+import static models.MessageSyntax.buildOutputSuccesfullMessage;
 import wordReserved.CategoryIdentifier;
 
 /**
@@ -28,7 +29,7 @@ public class SyntacticAnalyzer {
     public String validateProgram(ArrayList<String> program) {
         this.myProgram = program;
         String outputAnalyzer = "\n--------------Resultado Analizador Sintactico--------------\n";
-        
+
         for (String line : program) {
             try {
                 validateLine(line);
@@ -50,10 +51,6 @@ public class SyntacticAnalyzer {
     private void validateLine(String line) throws Exception {
         int numLine = this.countLine++;
         String[] auxVariablesLine = line.split(",");
-        //ver vector de linea
-//        for (int i = 0; i < auxVariablesLine.length; i++) {
-//            System.out.println(auxVariablesLine[i]);
-//        }
         String identifierLine = auxVariablesLine[0];
         if (isValidateTypeLine(identifierLine)) {
             switch (LineTypes.valueOf(identifierLine)) {
@@ -76,7 +73,6 @@ public class SyntacticAnalyzer {
                     validateLineCycle(auxVariablesLine, numLine);
                     break;
                 case Condicion:
-
                     validateLineCondition(auxVariablesLine, numLine);
                     break;
                 case SalidaConsola:
@@ -92,13 +88,9 @@ public class SyntacticAnalyzer {
                     validateEndOfClass(auxVariablesLine, numLine);
                     break;
             }
-            // this.countLine = this.countLine +1;
         } else {
-            //vlidar todas las lineas ERROR DE SYNTAXIS
-            //System.out.println("inicio linea malo");
             throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_ERROR_SYNTAX));
         }
-        // countLine ++;
     }
 
     /**
@@ -129,17 +121,16 @@ public class SyntacticAnalyzer {
         switch (auxVariablesLine.length) {
             case 2:
                 if (auxVariablesLine[0].equals(CategoryIdentifier.VARIABLE_NATURAL.getEquivalence()) && auxVariablesLine[1].equals(CategoryIdentifier.NOMBRE_VARIABLE.getEquivalence())) {
-                    System.out.println("Syntax succesfull!");
+                    throw new Exception(buildOutputSuccesfullMessage(numLine, MessageSyntax.MSG_SUCESSFULL_SYNTAX));
                 } else {
                     throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_VARIABLE_NAME));
                 }
-                break;
             case 4:
                 ArbolAsignacion arbolAsignacion = new ArbolAsignacion();
-                arbolAsignacion.validateLineWithArbolOfAssignment(auxVariablesLine);
+                arbolAsignacion.validateLineWithArbolOfAssignment(auxVariablesLine, numLine);
                 break;
             default:
-                throw new Exception(buildOutputErrorMessage(countLine, MessageSyntax.MSG_ASSIGNAMENT_VARIABLE_INCORRECT));
+                throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_ASSIGNAMENT_VARIABLE_INCORRECT));
 
         }
     }
@@ -149,16 +140,16 @@ public class SyntacticAnalyzer {
      *
      * @param auxVariablesLine
      */
-    private void validateLineCycle(String[] auxVariablesLine, int numLine) {
+    private void validateLineCycle(String[] auxVariablesLine, int numLine) throws Exception {
         if (auxVariablesLine.length == 4) {
             if (searchEndCycle()) {
                 ArbolCiclo arbolCiclo = new ArbolCiclo();
-                arbolCiclo.validateLineWithArbolOfCycle(auxVariablesLine);
+                arbolCiclo.validateLineWithArbolOfCycle(auxVariablesLine, numLine);
             } else {
-                System.out.println(MessageSyntax.MSG_NOT_ENDOFCYCLE_FOUND);
+                throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_NOT_ENDOFCYCLE_FOUND));
             }
         } else {
-            System.out.println(MessageSyntax.MSG_ERROR_SYNTAX);
+            throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_DEFINITION_CYCLE));
         }
     }
 
@@ -183,16 +174,16 @@ public class SyntacticAnalyzer {
      *
      * @param auxVariablesLine
      */
-    private void validateLineCondition(String[] auxVariablesLine, int numLine) {
+    private void validateLineCondition(String[] auxVariablesLine, int numLine) throws Exception {
         if (auxVariablesLine.length == 4) {
             if (searchEndCondition()) {
                 ArbolCondicion arbolCondicion = new ArbolCondicion();
-                arbolCondicion.validateLineWithArbolOfCondition(auxVariablesLine);
+                arbolCondicion.validateLineWithArbolOfCondition(auxVariablesLine, numLine);
             } else {
-                System.out.println(MessageSyntax.MSG_NOT_FOUND_ENDOFCONDITION);
+                throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_NOT_FOUND_ENDOFCONDITION));
             }
         } else {
-            System.out.println(MessageSyntax.MSG_ERROR_SYNTAX);
+               throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_DEFINITION_CONDITION));
         }
     }
 
@@ -232,40 +223,44 @@ public class SyntacticAnalyzer {
         miProgram.add("LibreriaVer, rff");
         miProgram.add("LibreriaSuma");
         miProgram.add("LibreriaNatural, hd, hd");
-        miProgram.add("SalidaConsola");
+        miProgram.add("SalidaConsola, hd");
         miProgram.add("Cabecera, JIS");
-
-//        miProgram.add("VariableNatural,NombreVariable");
-//        miProgram.add("Ciclo,NombreVariable,MenorQue,NombreVariable");
-//        miProgram.add("CicloFin,rr,tt,5t");
-//        miProgram.add("Condicion,NombreVariable,OperadorDeEquvalencia,NombreVariable");
-//        miProgram.add("CondicionFin,rr,tt,5t");
+        miProgram.add("VariableNatural,NombreVariable,OperadorDeAsignacion,Numero");
+        miProgram.add("Ciclo,NombreVariable,MenorQue,NombreVariable");
+        miProgram.add("CicloFin");//ya
+        miProgram.add("Condicion,NombreVariable,OperadorDeEquivalencia,NombreVariable");
+        miProgram.add("CondicionFin");
         miProgram.add("FinalClase");
         s.validateProgram(miProgram);
 
     }
 
-    private void validateEndOfCondition(String[] auxVariablesLine, int numLine) {
+    /**
+     * valida la estructura de un final de condicion
+     * @param auxVariablesLine
+     * @param numLine 
+     */
+    private void validateEndOfCondition(String[] auxVariablesLine, int numLine) throws Exception {
         if (auxVariablesLine.length == 1) {
-            System.out.println(MessageSyntax.MSG_SUCESSFULL_SYNTAX);
+             throw new Exception(buildOutputSuccesfullMessage(numLine, MessageSyntax.MSG_SUCESSFULL_SYNTAX));
         } else {
-            System.out.println(MessageSyntax.MSG_ERROR_SYNTAX);
+             throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_DEFINITION_CONDITION));
         }
     }
 
-    private void validateEndOfCycle(String[] auxVariablesLine, int numLine) {
+    private void validateEndOfCycle(String[] auxVariablesLine, int numLine) throws Exception {
         if (auxVariablesLine.length == 1) {
-            System.out.println(MessageSyntax.MSG_SUCESSFULL_SYNTAX);
+            throw new Exception(buildOutputSuccesfullMessage(numLine, MessageSyntax.MSG_SUCESSFULL_SYNTAX));
         } else {
-            System.out.println(MessageSyntax.MSG_ERROR_SYNTAX);
+            throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_DEFINITION_ENDCYCLE));
         }
     }
 
-    private boolean validateEndOfClass(String[] auxVariablesLine, int numLine) {
+    private void validateEndOfClass(String[] auxVariablesLine, int numLine) throws Exception {
         if (auxVariablesLine.length == 1) {
-            return true;
+            throw new Exception(buildOutputSuccesfullMessage(numLine, MessageSyntax.MSG_SUCESSFULL_SYNTAX));
         } else {
-            return false;
+            throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_END_CLASS));
         }
     }
 
@@ -275,7 +270,7 @@ public class SyntacticAnalyzer {
      * @param auxVariablesLine
      */
     private void validateDefinitionOfClass(String[] auxVariablesLine, int numLine) throws Exception {
-        if (searchEndOfClass(numLine)) {
+        if (searchEndOfClass()) {
             if (auxVariablesLine.length == 1) {
                 ArbolDefinicionClase arbolDefinicionClase = new ArbolDefinicionClase();
                 arbolDefinicionClase.validateLineWithArbolOfDefinitionClass(auxVariablesLine, numLine);
@@ -292,10 +287,10 @@ public class SyntacticAnalyzer {
      *
      * @return true si existe final de clase
      */
-    private boolean searchEndOfClass(int numLine) {
+    private boolean searchEndOfClass() {
         for (String line : myProgram) {
             String[] variablesLine = line.split(",");
-            if ((variablesLine[0].equals(CategoryIdentifier.FINAL.getEquivalence()) && (validateEndOfClass(variablesLine, numLine)))) {
+            if ((variablesLine[0].equals(CategoryIdentifier.FINAL.getEquivalence()) && (variablesLine.length == 1))) {
                 return true;
             }
         }

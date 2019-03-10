@@ -6,6 +6,7 @@
 package Arboles;
 
 import models.MessageSyntax;
+import static models.MessageSyntax.buildOutputErrorMessage;
 import wordReserved.CategoryIdentifier;
 
 /**
@@ -13,14 +14,16 @@ import wordReserved.CategoryIdentifier;
  * @author Yuliana Boyaca
  */
 public class ArbolCiclo {
-      /* Atributos */
+
+    /* Atributos */
     private Nodo raiz;
     private final String OPERADOR_DE_EQUIVALENCIA = "OperadorDeEquivalencia";
     private final String SIMBOLOS_OPERADOR_DE_EQUIVALENCIA = "<,>,>=,<=";
+
     /* Contructories */
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public ArbolCiclo() {
-        
+
         this.addNodo(new Nodo(CategoryIdentifier.CICLO.getEquivalence()));
         this.addNodo(new Nodo(CategoryIdentifier.CICLO.getSymbol()));
         this.addNodo(new Nodo(CategoryIdentifier.NOMBRE_VARIABLE.getEquivalence()));
@@ -29,21 +32,22 @@ public class ArbolCiclo {
         this.addNodo(new Nodo(SIMBOLOS_OPERADOR_DE_EQUIVALENCIA));
         this.addNodo(new Nodo(CategoryIdentifier.NOMBRE_VARIABLE.getEquivalence()));
         this.addNodo(new Nodo(CategoryIdentifier.NOMBRE_VARIABLE.getSymbol()));
-        mostrarPreOrden(this.raiz);
     }
 
     /**
      * Agrega al arbol el nodo indicado, llamando al metodo recursivo
-     * @param nodo 
+     *
+     * @param nodo
      */
     public void addNodo(Nodo nodo) {
         this.composeTree(nodo, this.raiz);
     }
-    
+
     /**
      * Metodo recursivo que compone el arbol
+     *
      * @param nodo
-     * @param raiz 
+     * @param raiz
      */
     private void composeTree(Nodo nodo, Nodo raiz) {
         if (raiz == null) {
@@ -68,10 +72,11 @@ public class ArbolCiclo {
         mostrar(raiz);
     }
 
-  /**
-   * Metodo recursivo de mostrar
-   * @param tmp 
-   */
+    /**
+     * Metodo recursivo de mostrar
+     *
+     * @param tmp
+     */
     public void mostrar(Nodo tmp) {
         tmp.mostrar();
         if (tmp.getHojaIzquierda() != null) {
@@ -90,9 +95,10 @@ public class ArbolCiclo {
     }
 
     /**
-     * Metodo recursivo que se encarga de mostrar el arbol utilizando la tecnica pre-order
-     * root-left-rigth
-     * @param tmp 
+     * Metodo recursivo que se encarga de mostrar el arbol utilizando la tecnica
+     * pre-order root-left-rigth
+     *
+     * @param tmp
      */
     public void mostrarPreOrden(Nodo tmp) {
         tmp.mostrar();
@@ -106,33 +112,38 @@ public class ArbolCiclo {
 
     /**
      * Valida la linea con el arbol de estructura de definicion de un ciclo
+     *
      * @param auxLine
+     * @param numLine
+     * @throws java.lang.Exception
      */
-    public void validateLineWithArbolOfCycle(String[] auxLine) {
+    public void validateLineWithArbolOfCycle(String[] auxLine, int numLine) throws Exception {
         if (!raiz.getValor().equals(auxLine[0])) {
-            System.out.println("Syntax Error: Inicio de ciclo incorrecto");
+            throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_ERROR_SYNTAX));
         } else if (!raiz.getHojaDerecha().getValor().equals(auxLine[1])) {
-            System.out.println("Syntax Error: nombre de variable incorrecto");
+            throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_VARIABLE_NAME));
         } else if (!raiz.getHojaDerecha().getHojaDerecha().getValor().equals(validateOperatorsEquivalency(auxLine[2]))) {
-            System.out.println("Syntax Error: Operacion de equivalencia incorrecto");
+            throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_OPERATION_EQUIVALENCY));
         } else if (!raiz.getHojaDerecha().getHojaDerecha().getHojaDerecha().getValor().equals(auxLine[3])) {
-            System.out.println("Syntax Error: nombre de variable incorrecto");
+            throw new Exception(buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_VARIABLE_NAME));
         } else {
-            System.err.println(MessageSyntax.MSG_SUCESSFULL_SYNTAX);
+            throw new Exception(MessageSyntax.buildOutputSuccesfullMessage(numLine, MessageSyntax.MSG_SUCESSFULL_SYNTAX));
         }
     }
-    
+
     /**
-     * Verifica si el string ingresado realmente corresponde a un tipo de operador
+     * Verifica si el string ingresado realmente corresponde a un tipo de
+     * operador
+     *
      * @param typeOperator
-     * @return 
+     * @return
      */
     private String validateOperatorsEquivalency(String typeOperator) {
         if (typeOperator.equals(CategoryIdentifier.MAYOR_IGUAL.getEquivalence())
-                ||typeOperator.equals(CategoryIdentifier.MENOR_IGUAL.getEquivalence())
-                 ||typeOperator.equals(CategoryIdentifier.MENOR_QUE.getEquivalence())
-                 ||typeOperator.equals(CategoryIdentifier.MAYOR_QUE.getEquivalence())) {
-             return OPERADOR_DE_EQUIVALENCIA;
+                || typeOperator.equals(CategoryIdentifier.MENOR_IGUAL.getEquivalence())
+                || typeOperator.equals(CategoryIdentifier.MENOR_QUE.getEquivalence())
+                || typeOperator.equals(CategoryIdentifier.MAYOR_QUE.getEquivalence())) {
+            return OPERADOR_DE_EQUIVALENCIA;
         }
         return typeOperator;
     }

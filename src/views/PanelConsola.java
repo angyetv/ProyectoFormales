@@ -22,6 +22,7 @@ public class PanelConsola extends JPanel {
     private final JTextArea jTextArea;
 
     public PanelConsola() {
+        setBackground(Color.decode("#f0f0f0"));
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("   "));
         JLabel lbTitulo = new JLabel("Analisis Sintactico y Lexico");

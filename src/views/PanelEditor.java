@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
@@ -17,6 +18,7 @@ public class PanelEditor extends JPanel {
     private JTextArea jTextArea;
 
     public PanelEditor() {
+        setBackground(Color.decode("#f0f0f0"));
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("   "));
         jTextArea = new JTextArea();
@@ -37,5 +39,9 @@ public class PanelEditor extends JPanel {
 
     void clearEditor() {
         jTextArea.setText("");
+    }
+
+    void printProgramInEditorDeTexto(String program) {
+        jTextArea.setText(program);
     }
 }

@@ -18,7 +18,6 @@ public class ArbolSalidaConsola {
         addNodo(new Nodo(CategoryIdentifier.SALIDA_CONSOLA.getSymbol()));
         addNodo(new Nodo(CategoryIdentifier.NOMBRE_VARIABLE.getEquivalence()));
         addNodo(new Nodo(CategoryIdentifier.NOMBRE_VARIABLE.getSymbol()));
-        mostrarPreOrden();
     }
 
     /**
@@ -59,10 +58,10 @@ public class ArbolSalidaConsola {
      * @param numLine
      */
     public void validateLineWithArbolOfOutputInConsole(String[] auxLine, int numLine) throws Exception {
-        if (!raiz.getValor().equals(auxLine[0])) {
-            throw new Exception(MessageSyntax.buildOutputSuccesfullMessage(numLine, MessageSyntax.MSG_INVALID_OUTPUT));
+        if (!raiz.getHojaDerecha().getValor().equals(auxLine[1])) {
+            throw new Exception(MessageSyntax.buildOutputErrorMessage(numLine, MessageSyntax.MSG_INVALID_OUTPUT));
         } else {
-            throw new Exception(MessageSyntax.buildOutputErrorMessage(numLine, MessageSyntax.MSG_SUCESSFULL_SYNTAX));
+            throw new Exception(MessageSyntax.buildOutputSuccesfullMessage(numLine, MessageSyntax.MSG_SUCESSFULL_SYNTAX));
         }
     }
 
