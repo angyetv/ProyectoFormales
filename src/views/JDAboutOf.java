@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -13,7 +14,10 @@ import javax.swing.JPanel;
 public class JDAboutOf extends JDialog {
 
     public JDAboutOf() {
-        this.setSize(new Dimension(500, 700));
+      ImageIcon imageIcon = new ImageIcon("src/Img/LOGO.PNG");
+        Image image = imageIcon.getImage();
+        this.setIconImage(image);
+        this.setSize(500, 700);
         this.setLayout(new BorderLayout());
         this.setBackground(Color.decode("#FFFFFF"));
         this.setTitle("Acerca de");

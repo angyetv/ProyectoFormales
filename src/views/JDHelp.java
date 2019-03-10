@@ -3,6 +3,7 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -12,6 +13,9 @@ import javax.swing.JPanel;
 public class JDHelp extends JDialog {
 
     public JDHelp() {
+        ImageIcon imageIcon = new ImageIcon("src/Img/LOGO.PNG");
+        Image image = imageIcon.getImage();
+        this.setIconImage(image);
         this.setSize(new Dimension(700, 500));
         this.setTitle("Ayuda");
         this.setBackground(Color.decode("#FFFFFF"));

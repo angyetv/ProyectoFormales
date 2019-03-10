@@ -50,13 +50,15 @@ public class Controller implements ActionListener {
                 mainWindow.clearEditor();
                 mainWindow.clearConsole();
                 break;
-            case HELP:
+            case HELP: 
+                jDHelp.setLocationRelativeTo(mainWindow);
                 jDHelp.setVisible(true);
                 break;
             case EXIT:
                 System.exit(0);
                 break;
             case ABOUT_OF:
+                jDAboutOf.setLocationRelativeTo(mainWindow);
                 jDAboutOf.setVisible(true);
                 break;
             case CLEAR_CONSOLE:
@@ -102,7 +104,6 @@ public class Controller implements ActionListener {
             JFileChooser file = new JFileChooser();
             file.showOpenDialog(mainWindow);
             File abre = file.getSelectedFile();
-            System.out.println("selelcciono" + abre.getAbsolutePath());
             if (abre != null) {
                 FileReader archivos = new FileReader(abre);
                 BufferedReader lee = new BufferedReader(archivos);
