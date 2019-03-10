@@ -1,10 +1,10 @@
 LIBRERIAVER
-LIBRERIASUMA
 LIBRERIANATURAL
 
 INICIO 
-NATURAL resultado
-NATURAL numero1 = 5
+NATURALE numero1 = 5
 NATURAL numero2 = 7
+
+CICLO numero1 > numero2
 VER numero1
-FIN
+

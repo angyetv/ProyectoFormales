@@ -86,7 +86,14 @@ public class Controller implements ActionListener {
         } else {
             MainWindow.printInConsole(lexiconOutput, false);
         }
-        mainWindow.printInConsole(syntacticAnalyzer.validateProgram(lexiconAnalyzerAdministrator.getToSyntactic()), false);
+        
+        String analysisSyntacticOutput = syntacticAnalyzer.validateProgram(lexiconAnalyzerAdministrator.getToSyntactic());
+        if (analysisSyntacticOutput.contains("Syntax Error")){
+            MainWindow.printInConsole(analysisSyntacticOutput, true);
+        }else{
+            MainWindow.printInConsole(analysisSyntacticOutput, false);
+        }
+        
         syntacticAnalyzer.setCountLine(1);
         lexiconAnalyzerAdministrator.getLinesList().clear();
         lexiconAnalyzerAdministrator.setTOKEN(0);

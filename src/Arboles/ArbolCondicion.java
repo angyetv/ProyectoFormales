@@ -130,10 +130,10 @@ public class ArbolCondicion {
      * @return 
      */
     private String validateOperatorsEquivalency(String typeOperator) {
-        if (typeOperator.equals(CategoryIdentifier.MAYOR_IGUAL.getSymbol())
-                ||typeOperator.equals(CategoryIdentifier.MENOR_IGUAL.getSymbol())
-                 ||typeOperator.equals(CategoryIdentifier.MENOR_QUE.getSymbol())
-                 ||typeOperator.equals(CategoryIdentifier.MAYOR_QUE.getSymbol())) {
+        if (typeOperator.equals(CategoryIdentifier.MAYOR_IGUAL.getEquivalence())
+                ||typeOperator.equals(CategoryIdentifier.MENOR_IGUAL.getEquivalence())
+                 ||typeOperator.equals(CategoryIdentifier.MENOR_QUE.getEquivalence())
+                 ||typeOperator.equals(CategoryIdentifier.MAYOR_QUE.getEquivalence())) {
              return OPERADOR_DE_EQUIVALENCIA;
         }
         return typeOperator;
