@@ -1,0 +1,10 @@
+LIBRERIA NATURAL
+
+INICIO 
+NATURAL numero1 = 5
+NATURAL numero2 = 7
+CICLO 
+VER yeihhlistoPrograma
+
+VER numero1
+FIN

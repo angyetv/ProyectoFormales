@@ -33,12 +33,14 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setBackground(Color.decode("#f0f0f0"));
-        
-        ImageIcon imageIcon = new ImageIcon("src/Img/LOGO.PNG");
-        Image image = imageIcon.getImage();
+
+//        ImageIcon imageIcon = new ImageIcon("src/Img/LOGO.PNG");
+        Image image = new ImageIcon(getClass().getResource("/Img/LOGO.PNG")).getImage();
+
+//        Image image = imageIcon.getImage();
         this.setIconImage(image);
         this.setTitle("ANALIZADOR LEXICO Y SINTACTICO DANYA");
-        
+
         this.output = "";
 
         JPanel pnCenter = new JPanel();
@@ -46,23 +48,26 @@ public class MainWindow extends JFrame {
 
         JPanel pnButtons = new JPanel();
         pnButtons.setBackground(Color.decode("#f0f0f0"));
-        
+
         pnButtons.setLayout(new GridLayout(1, 3));
-         JButton btnCargarFile = new JButton("Abrir programa", new ImageIcon("src/Img/carpeta.png"));
-          btnCargarFile.setBackground(Color.decode("#8aba56"));
+        JButton btnCargarFile = new JButton("Abrir programa", new ImageIcon(getClass().getResource("/Img/carpeta.png")));
+//        JButton btnCargarFile = new JButton("Abrir programa", new ImageIcon("src/Img/carpeta.png"));
+        btnCargarFile.setBackground(Color.decode("#8aba56"));
         btnCargarFile.setActionCommand(Actions.OPEN_FILE.name());
         btnCargarFile.addActionListener(Controller.getInstance());
-        
-        JButton btnRun = new JButton("Ejecutar", new ImageIcon("src/Img/play.png"));
+
+        JButton btnRun = new JButton("Ejecutar", new ImageIcon(getClass().getResource("/Img/play.png")));
+//        JButton btnRun = new JButton("Ejecutar", new ImageIcon("src/Img/play.png"));
         btnRun.setBackground(Color.decode("#8aba56"));
         btnRun.setActionCommand(Actions.RUN.name());
         btnRun.addActionListener(Controller.getInstance());
-        
-        JButton btnClear = new JButton("Limpiar Todo", new ImageIcon("src/Img/escoba.png"));
-         btnClear.setBackground(Color.decode("#8aba56"));
+
+        JButton btnClear = new JButton("Limpiar Todo", new ImageIcon(getClass().getResource("/Img/escoba.png")));
+//        JButton btnClear = new JButton("Limpiar Todo", new ImageIcon("src/Img/escoba.png"));
+        btnClear.setBackground(Color.decode("#8aba56"));
         btnClear.setActionCommand(Actions.CLEAR.name());
         btnClear.addActionListener(Controller.getInstance());
-        
+
         pnButtons.setBorder(BorderFactory.createTitledBorder("  "));
         pnButtons.add(btnCargarFile);
         pnButtons.add(btnRun);

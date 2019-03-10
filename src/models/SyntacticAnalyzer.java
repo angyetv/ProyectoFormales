@@ -215,25 +215,25 @@ public class SyntacticAnalyzer {
         return false;
     }
 
-    public static void main(String[] args) {
-        SyntacticAnalyzer s = new SyntacticAnalyzer();
-
-        ArrayList<String> miProgram = new ArrayList<>();
-        //miProgram.add("VariableNatural,NombreVariable");
-        miProgram.add("LibreriaVer, rff");
-        miProgram.add("LibreriaSuma");
-        miProgram.add("LibreriaNatural, hd, hd");
-        miProgram.add("SalidaConsola, hd");
-        miProgram.add("Cabecera, JIS");
-        miProgram.add("VariableNatural,NombreVariable,OperadorDeAsignacion,Numero");
-        miProgram.add("Ciclo,NombreVariable,MenorQue,NombreVariable");
-        miProgram.add("CicloFin");//ya
-        miProgram.add("Condicion,NombreVariable,OperadorDeEquivalencia,NombreVariable");
-        miProgram.add("CondicionFin");
-        miProgram.add("FinalClase");
-        s.validateProgram(miProgram);
-
-    }
+//    public static void main(String[] args) {
+//        SyntacticAnalyzer s = new SyntacticAnalyzer();
+//
+//        ArrayList<String> miProgram = new ArrayList<>();
+//        //miProgram.add("VariableNatural,NombreVariable");
+//        miProgram.add("LibreriaVer, rff");
+//        miProgram.add("LibreriaSuma");
+//        miProgram.add("LibreriaNatural, hd, hd");
+//        miProgram.add("SalidaConsola, hd");
+//        miProgram.add("Cabecera, JIS");
+//        miProgram.add("VariableNatural,NombreVariable,OperadorDeAsignacion,Numero");
+//        miProgram.add("Ciclo,NombreVariable,MenorQue,NombreVariable");
+//        miProgram.add("CicloFin");//ya
+//        miProgram.add("Condicion,NombreVariable,OperadorDeEquivalencia,NombreVariable");
+//        miProgram.add("CondicionFin");
+//        miProgram.add("FinalClase");
+//        s.validateProgram(miProgram);
+//
+//    }
 
     /**
      * valida la estructura de un final de condicion

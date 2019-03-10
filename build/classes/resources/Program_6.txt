@@ -1,0 +1,10 @@
+LIBRERIAVER
+LIBRERIANATURAL
+
+INICIO 
+NATURALE numero1 = 5
+NATURAL numero2 = 7
+
+CICLO numero1 > numero2
+VER numero1
+

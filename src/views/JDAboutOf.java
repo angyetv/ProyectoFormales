@@ -14,7 +14,8 @@ import javax.swing.JPanel;
 public class JDAboutOf extends JDialog {
 
     public JDAboutOf() {
-      ImageIcon imageIcon = new ImageIcon("src/Img/LOGO.PNG");
+      ImageIcon imageIcon = new ImageIcon(getClass().getResource("/Img/LOGO.PNG"));
+//      ImageIcon imageIcon = new ImageIcon("src/Img/LOGO.PNG");
         Image image = imageIcon.getImage();
         this.setIconImage(image);
         this.setSize(500, 700);
@@ -32,7 +33,7 @@ public class JDAboutOf extends JDialog {
 
     private JPanel addImage() {
         JPanel jPanel = new JPanel();
-        ImageIcon icon = new ImageIcon("src/img/LOGO.PNG");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Img/LOGO.PNG"));
         ImageIcon iconoEscala = new ImageIcon(icon.getImage().getScaledInstance(230, -10, java.awt.Image.SCALE_SMOOTH));
         JLabel jLabel = new JLabel(iconoEscala);
         jPanel.setBackground(Color.decode("#FFFFFF"));
