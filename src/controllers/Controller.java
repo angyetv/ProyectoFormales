@@ -1,17 +1,11 @@
 package controllers;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import models.LexiconAnalyzerAdministrator;
@@ -50,7 +44,7 @@ public class Controller implements ActionListener {
                 mainWindow.clearEditor();
                 mainWindow.clearConsole();
                 break;
-            case HELP: 
+            case HELP:
                 jDHelp.setLocationRelativeTo(mainWindow);
                 jDHelp.setVisible(true);
                 break;
@@ -64,7 +58,7 @@ public class Controller implements ActionListener {
             case CLEAR_CONSOLE:
                 mainWindow.clearConsole();
                 break;
-             case OPEN_FILE:
+            case OPEN_FILE:
                 mainWindow.printProgramInEditorDeTexto(abrirArchivo());
                 break;
         }
@@ -81,19 +75,21 @@ public class Controller implements ActionListener {
     private void runCode() {
         lexiconAnalyzerAdministrator.setLines(mainWindow.getCode());
         String lexiconOutput = lexiconAnalyzerAdministrator.printLexicon();
+        boolean isError = false;
         if (lexiconOutput.contains("Error Lexico en la linea ")) {
             MainWindow.printInConsole(lexiconOutput, true);
+            isError = true;
         } else {
             MainWindow.printInConsole(lexiconOutput, false);
         }
-        
-        String analysisSyntacticOutput = syntacticAnalyzer.validateProgram(lexiconAnalyzerAdministrator.getToSyntactic());
-        if (analysisSyntacticOutput.contains("Syntax Error")){
-            MainWindow.printInConsole(analysisSyntacticOutput, true);
-        }else{
-            MainWindow.printInConsole(analysisSyntacticOutput, false);
+        if (!isError) {
+            String analysisSyntacticOutput = syntacticAnalyzer.validateProgram(lexiconAnalyzerAdministrator.getToSyntactic());
+            if (analysisSyntacticOutput.contains("Syntax Error")) {
+                MainWindow.printInConsole(analysisSyntacticOutput, true);
+            } else {
+                MainWindow.printInConsole(analysisSyntacticOutput, false);
+            }
         }
-        
         syntacticAnalyzer.setCountLine(1);
         lexiconAnalyzerAdministrator.getLinesList().clear();
         lexiconAnalyzerAdministrator.setTOKEN(0);
@@ -102,7 +98,8 @@ public class Controller implements ActionListener {
 
     /**
      * Abre y carga el programa
-     * @return 
+     *
+     * @return
      */
     private String abrirArchivo() {
         String aux = "";
