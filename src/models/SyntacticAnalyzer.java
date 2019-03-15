@@ -9,6 +9,7 @@ import Arboles.ArbolSalidaConsola;
 import java.util.ArrayList;
 import static models.MessageSyntax.buildOutputErrorMessage;
 import static models.MessageSyntax.buildOutputSuccesfullMessage;
+import models.entity.LineTypes;
 import wordReserved.CategoryIdentifier;
 
 /**
