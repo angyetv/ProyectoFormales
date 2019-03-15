@@ -96,6 +96,7 @@ public class LexiconAnalyzerAdministrator {
             }
             arrayList.add(line);
         }
+        System.out.println("Cuando escribo que le envio " + arrayList);
         return arrayList;
     }
 
